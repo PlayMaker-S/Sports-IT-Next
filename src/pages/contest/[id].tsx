@@ -9,15 +9,17 @@ import GoBackHeader from "@component/components/header/GoBackHeader";
 import { IContestInfo, IHost } from "@component/interfaces/contestInterface";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import * as S from "./[id].styles";
-import styled from "styled-components";
+import { useRecoilState, useRecoilValue } from "recoil";
+import * as S from "../../styles/contest/[id].styles";
+import { selectContestIdAtom, templateIdAtom } from "@component/atoms/contestAtom";
 
 const ContestDetail = () => {
   const router = useRouter();
   const id = router.query.id;
   const token = useRecoilValue(userTokenAtom);
   const [contest, setContest] = useState<IContestInfo>();
+  const [templateID, setTemplateID] = useRecoilState(templateIdAtom);
+  const [selectContestID, setSelectContestID] = useRecoilState(selectContestIdAtom);
 
   const getDday = (timestamp: number) => {
     // 주어진 타임스탬프 값을 Date 객체로 변환
@@ -56,11 +58,17 @@ const ContestDetail = () => {
     });
     console.log(response.data);
     setContest(response.data);
+    setTemplateID(response.data.templateID);
+    setSelectContestID(response.data.competitionId);
   }
 
   useEffect(() => {
     getContestDetail(parseInt(id as string));
   }, []);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+  }, [router.isReady]);
 
   return (
     <PageWrapper>
@@ -71,9 +79,7 @@ const ContestDetail = () => {
           <S.ContestArea>
             <S.ContestInfo>
               <S.ContestTagArea>
-                {contest.competitionType === "FREE" ? null : (
-                  <S.PremiumTag>프리미엄</S.PremiumTag>
-                )}
+                {contest.competitionType === "FREE" ? null : <S.PremiumTag>프리미엄</S.PremiumTag>}
                 <S.Tag>스포츠</S.Tag>
                 <S.Tag>대회</S.Tag>
               </S.ContestTagArea>
@@ -82,20 +88,14 @@ const ContestDetail = () => {
                 <S.ContestHostName>{contest.host.name}</S.ContestHostName>
                 <S.PremiumLogo src="/images/logo/premiumLogo.png" />
               </S.ContestHostArea>
-              <S.ContestDday>
-                {getDday(Date.parse(contest.endDate) / 1000)}
-              </S.ContestDday>
+              <S.ContestDday>{getDday(Date.parse(contest.endDate) / 1000)}</S.ContestDday>
             </S.ContestInfo>
-            <S.PosterImage src={contest?.posters[0].posterUrl} />
+            <S.PosterImage src={contest.posters[0] ? contest?.posters[0].posterUrl : "/images/logo/AppLogo_black.png"} />
             <S.DetailWrapper>
               <S.DetailTitle>모집 기간</S.DetailTitle>
               <S.DetailContent>
-                {getMonth(contest.recruitingStart)}월{" "}
-                {getDay(contest.recruitingStart)}일 (
-                {getDayOfWeek(contest.recruitingStart)}) ~{" "}
-                {getMonth(contest.recruitingEnd)}월{" "}
-                {getDay(contest.recruitingEnd)}일 (
-                {getDayOfWeek(contest.recruitingEnd)})
+                {getMonth(contest.recruitingStart)}월 {getDay(contest.recruitingStart)}일 ({getDayOfWeek(contest.recruitingStart)}) ~{" "}
+                {getMonth(contest.recruitingEnd)}월 {getDay(contest.recruitingEnd)}일 ({getDayOfWeek(contest.recruitingEnd)})
               </S.DetailContent>
             </S.DetailWrapper>
             <S.DetailWrapper>
@@ -123,11 +123,7 @@ const ContestDetail = () => {
           <S.IconArea>
             <S.MessageIcon />
           </S.IconArea>
-          <S.ApplyButton
-            onClick={() => router.push("/participate/choice-role")}
-          >
-            대회 신청하기
-          </S.ApplyButton>
+          <S.ApplyButton onClick={() => router.push("/participate/choice-role")}>대회 신청하기</S.ApplyButton>
         </S.ApplyBar>
       </S.ApplyWrapper>
     </PageWrapper>
