@@ -11,7 +11,10 @@ import { useRecoilState } from "recoil";
 import { userIdAtom } from "@component/atoms/tokenAtom";
 import { roleAtom } from "@component/atoms/roleAtom";
 import { set } from "react-hook-form";
-import { ApplyRoleAtomType, RoleAtomType } from "@component/interfaces/roleInterface";
+import {
+  ApplyRoleAtomType,
+  RoleAtomType,
+} from "@component/interfaces/roleInterface";
 
 const BottomBarWrapper = styled.div`
   display: flex;
@@ -123,7 +126,9 @@ const BottomBar = () => {
           // }
 
           {
-            UserRole === "ROLE_INSTITUTION" ? router.push(`/feelit/123456`) : router.push(`/feelit/123457`);
+            UserRole === "ROLE_INSTITUTION"
+              ? router.push(`/feelit/123456`)
+              : router.push(`/feelit/123457`);
           } // 임시로 123456, 123457로 설정
         }}
       >

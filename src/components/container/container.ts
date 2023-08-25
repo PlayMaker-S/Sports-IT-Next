@@ -16,4 +16,8 @@ export const PageWrapper = styled.div`
   position: relative;
   overflow: auto;
   padding-bottom: 10%;
+
+  @media (min-width: 1200px) {
+    flex-direction: row;
+  }
 `;

@@ -20,3 +20,13 @@ export const ContentColumnArea = styled(ContentPaddingArea)`
   flex-direction: column;
   padding-top: 12%;
 `;
+
+export const LeftSideBar = styled.div`
+  width: 30vw;
+  height: 100vh;
+  @media (max-width: 1200px) {
+    display: none;
+  }
+`;
+
+export const RightSideBar = styled(LeftSideBar)``;
