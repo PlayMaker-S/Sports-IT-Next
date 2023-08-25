@@ -13,7 +13,8 @@ import styled, { keyframes, css } from "styled-components";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import { roleAtom } from "@component/atoms/roleAtom";
-
+import useGoogleLogin from "@component/hooks/useGoogleLogin";
+import useKakaoLogin from "@component/hooks/useKakaoLogin";
 const Login = () => {
   const { register, handleSubmit, formState } = useForm<ILoginProps>();
   const [userToken, setUserToken] = useRecoilState(userTokenAtom);
@@ -140,6 +141,8 @@ const Login = () => {
             placeholder="비밀번호"
           ></S.Input>
           <S.SubmitButton>로그인</S.SubmitButton>
+          <div style={{textDecoration:'underline'}}>카카오톡으로 로그인하기</div>
+          <div style={{textDecoration:'underline'}}>구글 로그인</div>
         </S.Form>
         <S.AccountPanel>
           <Link href="/auth/role-select">
