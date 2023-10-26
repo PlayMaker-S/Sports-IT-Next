@@ -141,6 +141,7 @@ const Login = () => {
           ></S.Input>
           <S.SubmitButton>로그인</S.SubmitButton>
         </S.Form>
+        <Link href="https://sports-it-test.store/oauth2/authorization/google?redirect_uri=http://localhost:8080">구글로 로그인하기</Link>
         <S.AccountPanel>
           <Link href="/auth/role-select">
             <S.AccountPanelText>회원가입</S.AccountPanelText>

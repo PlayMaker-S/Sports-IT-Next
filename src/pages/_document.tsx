@@ -36,6 +36,7 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="apple-touch-icon" href="/images/faviconpng.png" />
+          <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
           <meta name="apple-mobile-web-app-title" content="스포츠잇" />
           <meta name="application-name" content="스포츠잇" />
           <meta name="description" content="사람과 스포츠를 잇다, 스포츠잇" />
