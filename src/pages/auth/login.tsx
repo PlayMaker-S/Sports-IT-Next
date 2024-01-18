@@ -10,9 +10,10 @@ import { ILoginProps } from "@component/interfaces/accountInterface";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { userEmailAtom, userNameAtom, userTokenAtom, userIdAtom } from "@component/atoms/tokenAtom";
 import styled, { keyframes, css } from "styled-components";
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import { roleAtom } from "@component/atoms/roleAtom";
+import { useEffect, useState } from "react"; 
+import Head from "next/head"; 
+import { roleAtom } from "@component/atoms/roleAtom"; 
+import { signIn, useSession } from 'next-auth/react';
 
 const Login = () => {
   const { register, handleSubmit, formState } = useForm<ILoginProps>();
@@ -23,6 +24,8 @@ const Login = () => {
   const setUserName = useSetRecoilState(userNameAtom);
   const setUserEmail = useSetRecoilState(userEmailAtom);
   const router = useRouter();
+
+  const { data: session } = useSession(); //세션 정보를 가져옴
 
   const fadeOut = keyframes`
   0% {
@@ -140,6 +143,17 @@ const Login = () => {
             placeholder="비밀번호"
           ></S.Input>
           <S.SubmitButton>로그인</S.SubmitButton>
+          <S.KakaoLogin
+            // onClick{()=>{
+              onClick={()=> signIn("kakao")}
+          >
+            카카오톡 로그인하기
+          </S.KakaoLogin>
+          <S.GoogleLogin
+              onClick={()=> signIn("google")}
+          >
+            구글로 로그인하기
+          </S.GoogleLogin>
         </S.Form>
         <S.AccountPanel>
           <Link href="/auth/role-select">

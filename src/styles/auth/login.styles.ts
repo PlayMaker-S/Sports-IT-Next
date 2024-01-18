@@ -59,8 +59,34 @@ export const AccountPanelText = styled.span`
   margin: 0 10px;
 `;
 
-export const EasyLoginArea = styled.div``;
+export const EasyLoginArea = styled.div`
+`;
 
 export const EasyLoginImage = styled(Image)`
   margin: 0 25px;
 `;
+
+export const KakaoLogin = styled.div`
+  width: 90%;
+  background-color: #FDE500; 
+  border-radius: 12px;
+  line-height: 50px;
+  margin: 7px 0;
+  cursor: pointer;
+  color: #212121;
+  text-align: center;
+  height: 50px;
+` 
+export const GoogleLogin = styled.div`
+  width: 90%;
+  background-color: white;
+  border-radius: 12px;
+  margin: 7px 0;
+  height: 50px;
+  line-height: 50px;
+  cursor: pointer;
+  color: #212121;
+  border: 1px solid;
+  text-align: center;
+  border-color: lightgrey;
+` 
