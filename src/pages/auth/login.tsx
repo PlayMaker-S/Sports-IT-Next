@@ -169,7 +169,7 @@ const Login = () => {
             />
           </Link> */}
         </S.EasyLoginArea>
-        <SplashImage src="/images/splash.jpg" alt="splash" isVisible={isVisible} />
+        {/* <SplashImage src="/images/splash.jpg" alt="splash" isVisible={isVisible} /> */}
       </S.LoginContainer>
     </>
   );
