@@ -9,8 +9,8 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "", // 수정!!!!
     }),
     KakaoProvider({
-        clientId: process.env.KAKAO_CLIENT_ID!,
-        clientSecret: process.env.KAKAO_CLIENT_SECRET!,
+        clientId: process.env.KAKAO_CLIENT_ID || "",
+        clientSecret: process.env.KAKAO_CLIENT_SECRET || "",
       }),
   ],
   pages: {

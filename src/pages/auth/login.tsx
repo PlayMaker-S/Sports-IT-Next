@@ -40,13 +40,17 @@ const Login = () => {
   }
 `;
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-    }, 2000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsVisible(false);
+  //   }, 2000);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
+  useEffect(() => {
+     console.log(session)
+  }, [session]);
+
 
   console.log("Rerender !");
   console.log(isVisible);
@@ -145,12 +149,12 @@ const Login = () => {
           <S.SubmitButton>로그인</S.SubmitButton>
           <S.KakaoLogin
             // onClick{()=>{
-              onClick={()=> signIn("kakao")}
+              onClick={()=> signIn("kakao",{callbackUrl: "/" })}
           >
             카카오톡 로그인하기
           </S.KakaoLogin>
           <S.GoogleLogin
-              onClick={()=> signIn("google")}
+              onClick={()=> signIn("google",{callbackUrl: "/" })}
           >
             구글로 로그인하기
           </S.GoogleLogin>
