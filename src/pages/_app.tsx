@@ -17,6 +17,7 @@ import { useRecoilState } from "recoil";
 import { userTokenAtom, userIdAtom } from "@component/atoms/tokenAtom";
 import { type } from "os";
 import "@component/styles/global.css";
+import AuthContext from "./api/context/AuthContext";
 
 // _app.tsx는 모든 페이지에 공통적으로 적용될 내용을 작성 및 서버로부터 요청이 왔을 때 가장 먼저 실행되며,
 // 페이지에 적용할 공통 레이아웃을 설정하는 역할을 한다.
@@ -77,6 +78,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [token, userId]);
 
   return (
+  <AuthContext>
     <RecoilRoot>
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
@@ -89,5 +91,6 @@ export default function App({ Component, pageProps }: AppProps) {
         </QueryClientProvider>
       </ThemeProvider>
     </RecoilRoot>
+  </AuthContext>
   );
 }

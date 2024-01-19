@@ -57,7 +57,7 @@ const MyPage = () => {
       <WebContainer>
         <Header />
         <OrderContainer>
-          <OrderWrapper>
+          {/* <OrderWrapper>
             <OrderSelect
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                 // setIsFresh(true);
@@ -71,7 +71,7 @@ const MyPage = () => {
                 </OrderOption>
               ))}
             </OrderSelect>
-          </OrderWrapper>
+          </OrderWrapper> */}
         </OrderContainer>
         <ContentContainer>
           <AsideContainer>Hello</AsideContainer>

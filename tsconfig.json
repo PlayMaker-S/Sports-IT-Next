@@ -48,7 +48,7 @@
     "**/*.tsx",
     "types/**/*.d.ts",
     "build/types/**/*.ts"
-  ],
+, "src/components/web/survey/dummyData.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -10,9 +10,10 @@ import { ILoginProps } from "@component/interfaces/accountInterface";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { userEmailAtom, userNameAtom, userTokenAtom, userIdAtom } from "@component/atoms/tokenAtom";
 import styled, { keyframes, css } from "styled-components";
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import { roleAtom } from "@component/atoms/roleAtom";
+import { useEffect, useState } from "react"; 
+import Head from "next/head"; 
+import { roleAtom } from "@component/atoms/roleAtom"; 
+import { signIn, useSession } from 'next-auth/react';
 
 const Login = () => {
   const { register, handleSubmit, formState } = useForm<ILoginProps>();
@@ -23,6 +24,8 @@ const Login = () => {
   const setUserName = useSetRecoilState(userNameAtom);
   const setUserEmail = useSetRecoilState(userEmailAtom);
   const router = useRouter();
+
+  const { data: session } = useSession(); //세션 정보를 가져옴
 
   const fadeOut = keyframes`
   0% {
@@ -37,13 +40,17 @@ const Login = () => {
   }
 `;
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-    }, 2000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsVisible(false);
+  //   }, 2000);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
+  useEffect(() => {
+     console.log(session)
+  }, [session]);
+
 
   console.log("Rerender !");
   console.log(isVisible);
@@ -140,6 +147,17 @@ const Login = () => {
             placeholder="비밀번호"
           ></S.Input>
           <S.SubmitButton>로그인</S.SubmitButton>
+          <S.KakaoLogin
+            // onClick{()=>{
+              onClick={()=> signIn("kakao",{callbackUrl: "/" })}
+          >
+            카카오톡 로그인하기
+          </S.KakaoLogin>
+          <S.GoogleLogin
+              onClick={()=> signIn("google",{callbackUrl: "/" })}
+          >
+            구글로 로그인하기
+          </S.GoogleLogin>
         </S.Form>
         <S.AccountPanel>
           <Link href="/auth/role-select">
@@ -169,7 +187,7 @@ const Login = () => {
             />
           </Link> */}
         </S.EasyLoginArea>
-        <SplashImage src="/images/splash.jpg" alt="splash" isVisible={isVisible} />
+        {/* <SplashImage src="/images/splash.jpg" alt="splash" isVisible={isVisible} /> */}
       </S.LoginContainer>
     </>
   );
